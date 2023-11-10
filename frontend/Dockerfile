@@ -1,4 +1,5 @@
 # Get node js image to build the frontend application
+# this step is using node runtime, because we need to run the build command to get the static content
 
 FROM node:slim AS builder
 
@@ -14,9 +15,9 @@ RUN npm run build
 
 FROM nginx:slim
 
-WORKDIR /app
+RUN npm install
 
-COPY --from=builder /app/dist /app
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
