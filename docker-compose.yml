@@ -1,0 +1,46 @@
+version: '3.7'
+
+networks:
+
+  app-network:
+
+volumes:
+
+    app-volume:
+
+services:
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    networks:
+      - app-network
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_BACKEND_SERVER=http://backend:8888
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: backend
+    networks:
+      - app-network
+    ports:
+      - "8888:8888"
+    environment:
+      - DATABASE=mongodb:mongo-container:27017
+    depends_on:
+      - database
+    
+
+  database:
+    image: mongo
+    container_name: mongo-container
+    networks:
+      - app-network
+    ports:
+      - "27017:27017"
+    volumes:
+      - app-volume:/data/db

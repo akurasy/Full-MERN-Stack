@@ -8,4 +8,6 @@ RUN npm install
 
 RUN npm run setup
 
+EXPOSE 8888
+
 ENTRYPOINT [ "npm", "run", "dev" ]
