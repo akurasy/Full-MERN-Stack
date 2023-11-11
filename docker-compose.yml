@@ -30,7 +30,7 @@ services:
     ports:
       - "8888:8888"
     environment:
-      - DATABASE=mongodb:mongo-container:27017
+      - DATABASE=mongodb://mongo-container:27017
     depends_on:
       - database
     

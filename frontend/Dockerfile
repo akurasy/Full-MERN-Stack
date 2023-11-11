@@ -9,6 +9,8 @@ COPY . /app
 
 RUN npm install
 
+ENV VITE_BACKEND_SERVER=http://35.92.7.67:8888/
+
 RUN npm run build
 
 # Get nginx image to copy over the files gotten from the build stage and serve the static content in an nginx image
