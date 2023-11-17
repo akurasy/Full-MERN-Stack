@@ -17,8 +17,6 @@ RUN npm run build
 
 FROM nginx:slim
 
-RUN npm install
-
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
